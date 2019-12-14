@@ -1,101 +1,113 @@
 package com.mr208.treechoppin.core;
 
-import com.mr208.treechoppin.common.config.ConfigurationHandler;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
-import com.mr208.treechoppin.common.command.TCHCommand;
-import com.mr208.treechoppin.common.handler.EventHandler;
+import com.electronwill.nightconfig.core.CommentedConfig;
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
+import com.mr208.treechoppin.common.config.TCConfig;
 import com.mr208.treechoppin.common.network.ClientSettingsMessage;
 import com.mr208.treechoppin.common.network.ServerSettingsMessage;
-import com.mr208.treechoppin.proxy.CommonProxy;
-
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import static com.mr208.treechoppin.core.TreeChoppin.*;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = MOD_DEPENDENCIES, acceptableRemoteVersions = "*")
 
+
+@Mod("treechoppin")
 public class TreeChoppin
 {
-
   public static final String MOD_ID = "treechoppin";
-  public static final String MOD_NAME = "Tree Choppin";
-  public static final String MOD_VERSION = "1.0.0";
-  public static final String MOD_DEPENDENCIES = "required-after:forge@[14.23.2.2611,)";
-  public static SimpleNetworkWrapper m_Network;
-  
-  public static Map<Item, Boolean> registeredAxes = new HashMap<>();
+  private static final String PROTOCOL_VERSION = Integer.toString(1);
+  public static SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation("treechoppin", "main_channel"))
+          .clientAcceptedVersions(PROTOCOL_VERSION::equals)
+          .serverAcceptedVersions(PROTOCOL_VERSION::equals)
+          .networkProtocolVersion(() -> PROTOCOL_VERSION)
+          .simpleChannel();
+
+  public static Set<Item> blacklistAxes = new HashSet<>();
   public static Set<Block> registeredLogs = new HashSet<>();
   public static Set<Block> registeredLeaves = new HashSet<>();
-  
-  @SidedProxy(serverSide = "com.mr208.treechoppin.proxy.ServerProxy", clientSide = "com.mr208.treechoppin.proxy.CommonProxy")
-  private static CommonProxy commonProxy;
 
-  @Mod.EventHandler
-  public void preInit(FMLPreInitializationEvent event) {
 
-    m_Network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-    m_Network.registerMessage(ServerSettingsMessage.MsgHandler.class, ServerSettingsMessage.class, 0, Side.CLIENT);
-    m_Network.registerMessage(ClientSettingsMessage.MsgHandler.class, ClientSettingsMessage.class, 1, Side.SERVER);
+  public static boolean plantSapling;
+
+
+  public static boolean decayLeaves;
+
+  public static boolean disableShift;
+
+  public static boolean reverseShift;
+
+  public static boolean useTagLog;
+
+  public static boolean useTagLeaves;
+
+
+  public TreeChoppin() {
+    CommentedFileConfig configData = (CommentedFileConfig)CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve("treechoppin.toml")).sync().autosave().writingMode(WritingMode.REPLACE).build();
+
+    configData.load();
+
+    TCConfig.SPEC.setConfig((CommentedConfig)configData);
+
+    FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+    FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
   }
 
-  @Mod.EventHandler
-  public void init(FMLInitializationEvent event) {
-    MinecraftForge.EVENT_BUS.register(commonProxy);
-    MinecraftForge.EVENT_BUS.register(new EventHandler());
+
+  public void setup(FMLCommonSetupEvent event) {
+    int pktID = 0;
+
+    channel.registerMessage(pktID++, ServerSettingsMessage.class, ServerSettingsMessage::encode, ServerSettingsMessage::decode, ServerSettingsMessage.Handler::handle);
+    channel.registerMessage(pktID++, ClientSettingsMessage.class, ClientSettingsMessage::encode, ClientSettingsMessage::decode, ClientSettingsMessage.Handler::handle);
   }
 
-  @Mod.EventHandler
-  public void postInit(FMLPostInitializationEvent event) {
-    
-    for(String axe:ConfigurationHandler.axeTypesDamageable)
-    {
-      Item temp = Item.REGISTRY.getObject(new ResourceLocation(axe));
-      if(temp!=Items.AIR)
-        registeredAxes.put(temp, true);
+  public void loadComplete(FMLLoadCompleteEvent event) {
+    reverseShift = ((Boolean)TCConfig.options.reverseShift.get()).booleanValue();
+    disableShift = ((Boolean)TCConfig.options.disableShift.get()).booleanValue();
+    plantSapling = ((Boolean)TCConfig.options.plantSapling.get()).booleanValue();
+    decayLeaves = ((Boolean)TCConfig.options.decayLeaves.get()).booleanValue();
+    useTagLeaves = ((Boolean)TCConfig.logs.logTag.get()).booleanValue();
+    useTagLeaves = ((Boolean)TCConfig.leaves.leavesTag.get()).booleanValue();
+
+    for (String axe : TCConfig.axes.blacklistAxe.get()) {
+
+      Item temp = (Item)ForgeRegistries.ITEMS.getValue(new ResourceLocation(axe));
+      if (temp != Items.AIR) {
+        blacklistAxes.add(temp);
+      }
     }
-  
-    for(String axe:ConfigurationHandler.axeTypesUndamageable)
-    {
-      Item temp = Item.REGISTRY.getObject(new ResourceLocation(axe));
-      if(temp!=Items.AIR)
-        registeredAxes.put(temp, false);
+    if (useTagLog) {
+      registeredLogs.addAll(BlockTags.LOGS.getAllElements());
     }
-    
-    
-    for(String log:ConfigurationHandler.blockWhiteList)
-    {
-      Block temp = Block.REGISTRY.getObject(new ResourceLocation(log));
-      if(temp!=Blocks.AIR)
+    for (String log : TCConfig.logs.logBlocks.get()) {
+
+      Block temp = (Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation(log));
+      if (temp != Blocks.AIR && !registeredLogs.contains(temp)) {
         registeredLogs.add(temp);
+      }
     }
-  
-    for(String log:ConfigurationHandler.leafWhiteList)
-    {
-      Block temp = Block.REGISTRY.getObject(new ResourceLocation(log));
-      if(temp!=Blocks.AIR)
+    if (useTagLeaves) {
+      registeredLeaves.addAll(BlockTags.LEAVES.getAllElements());
+    }
+    for (String log : TCConfig.leaves.leaves.get()) {
+
+      Block temp = (Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation(log));
+      if (temp != Blocks.AIR && !registeredLeaves.contains(temp))
         registeredLeaves.add(temp);
     }
-  }
-
-  @Mod.EventHandler
-  public void serverStarting(FMLServerStartingEvent event) {
-    event.registerServerCommand(new TCHCommand());
   }
 }

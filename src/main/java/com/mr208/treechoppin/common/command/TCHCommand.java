@@ -1,4 +1,5 @@
-package com.mr208.treechoppin.common.command;
+
+/**package com.mr208.treechoppin.common.command;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.resources.I18n;
@@ -164,3 +165,4 @@ public class TCHCommand extends CommandBase {
     return text;
   }
 }
+*/
