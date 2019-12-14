@@ -1,0 +1,10 @@
+[{
+  "modid": "treechoppin",
+  "name": "Tree Choppin",
+  "description": "A Fork of Tree Chopper by DuchLord",
+  "version": "1.0.0",
+  "mcversion": "${version}",
+  "logoFile": "assets/treechoppin/textures/logo.png",
+  "url": "https://minecraft.curseforge.com/projects/tree-chopper",
+  "authorList": ["DuchLord","mallrat208"]
+  }]
