@@ -1,4 +1,4 @@
-package com.mr208.treechoppin.proxy;
+package com.mr208.ourcraft.timbery.proxy;
 
 import net.minecraft.util.math.BlockPos;
 

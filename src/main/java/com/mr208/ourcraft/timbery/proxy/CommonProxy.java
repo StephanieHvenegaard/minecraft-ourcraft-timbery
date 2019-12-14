@@ -1,11 +1,12 @@
-package com.mr208.treechoppin.proxy;
+package com.mr208.ourcraft.timbery.proxy;
 
-import com.mr208.treechoppin.common.config.TCConfig;
-import com.mr208.treechoppin.common.handler.TreeHandler;
-import com.mr208.treechoppin.core.TreeChoppin;
+import com.mr208.ourcraft.timbery.common.config.TCConfig;
+import com.mr208.ourcraft.timbery.common.handler.TreeHandler;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import com.mr208.ourcraft.timbery.core.Main;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -34,11 +35,11 @@ public class CommonProxy
     boolean shifting = true;
 
     if (!((Boolean) TCConfig.options.disableShift.get()).booleanValue()) {
-      if (interactEvent.getEntityPlayer().isSneaking() && !TreeChoppin.reverseShift) {
+      if (interactEvent.getEntityPlayer().isSneaking() && !Main.reverseShift) {
         shifting = false;
       }
 
-      if (!interactEvent.getEntityPlayer().isSneaking() && TreeChoppin.reverseShift) {
+      if (!interactEvent.getEntityPlayer().isSneaking() && Main.reverseShift) {
         shifting = false;
       }
     }
@@ -107,7 +108,7 @@ public class CommonProxy
 
 
   protected static boolean CheckWoodenBlock(World world, BlockPos blockPos) {
-    if (TreeChoppin.registeredLogs.contains(world.getBlockState(blockPos).getBlock())) {
+    if (Main.registeredLogs.contains(world.getBlockState(blockPos).getBlock())) {
       return true;
     }
     return (world.getBlockState(blockPos).getMaterial() == Material.WOOD);
@@ -119,7 +120,7 @@ public class CommonProxy
       return false;
     }
 
-    if (TreeChoppin.blacklistAxes.contains(entityPlayer.getHeldItemMainhand().getItem())) {
+    if (Main.blacklistAxes.contains(entityPlayer.getHeldItemMainhand().getItem())) {
       return false;
     }
     return entityPlayer.getHeldItemMainhand().getToolTypes().contains(ToolType.AXE);

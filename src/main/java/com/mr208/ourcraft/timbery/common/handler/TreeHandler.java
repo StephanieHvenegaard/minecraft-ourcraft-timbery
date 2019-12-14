@@ -1,9 +1,8 @@
-package com.mr208.treechoppin.common.handler;
-import com.mr208.treechoppin.common.tree.Tree;
-import com.mr208.treechoppin.core.TreeChoppin;
-
+package com.mr208.ourcraft.timbery.common.handler;
+import com.mr208.ourcraft.timbery.common.tree.Tree;
 import java.util.*;
 
+import com.mr208.ourcraft.timbery.core.Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -138,17 +137,17 @@ public class TreeHandler {
 
     if (world.getBlockState(blockPos).getBlock() != originBlock) {
 
-      if (TreeChoppin.plantSapling && world.getBlockState(blockPos).getMaterial() == Material.LEAVES && this.tree.GetM_Leaves().isEmpty()) {
+      if (Main.plantSapling && world.getBlockState(blockPos).getMaterial() == Material.LEAVES && this.tree.GetM_Leaves().isEmpty()) {
         this.tree.InsertLeaf(blockPos);
       }
 
-      if (TreeChoppin.decayLeaves && TreeChoppin.registeredLeaves.contains(world.getBlockState(blockPos).getBlock())) {
+      if (Main.decayLeaves && Main.registeredLeaves.contains(world.getBlockState(blockPos).getBlock())) {
         this.tree.InsertLeaf(blockPos);
 
         return false;
       }
 
-      if (TreeChoppin.decayLeaves && world.getBlockState(blockPos).getMaterial() == Material.LEAVES) {
+      if (Main.decayLeaves && world.getBlockState(blockPos).getMaterial() == Material.LEAVES) {
         this.tree.InsertLeaf(blockPos);
 
         return false;
@@ -183,7 +182,7 @@ public class TreeHandler {
         soundReduced++;
       }
 
-      if (TreeChoppin.plantSapling && !tmpTree.GetM_Leaves().isEmpty()) {
+      if (Main.plantSapling && !tmpTree.GetM_Leaves().isEmpty()) {
 
         BlockPos tmpPosition = getLastElement(tmpTree.GetM_Leaves());
         PlantSapling(world.getWorld(), tmpPosition, tmpTree.getM_Position());
@@ -191,7 +190,7 @@ public class TreeHandler {
 
       soundReduced = 0;
 
-      if (TreeChoppin.decayLeaves)
+      if (Main.decayLeaves)
       {
         for (BlockPos blockPos : tmpTree.GetM_Leaves()) {
 

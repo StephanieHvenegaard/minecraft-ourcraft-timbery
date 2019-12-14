@@ -1,7 +1,7 @@
-package com.mr208.treechoppin.proxy;
+package com.mr208.ourcraft.timbery.proxy;
 
-import com.mr208.treechoppin.common.handler.TreeHandler;
-import com.mr208.treechoppin.core.TreeChoppin;
+import com.mr208.ourcraft.timbery.common.handler.TreeHandler;
+import com.mr208.ourcraft.timbery.core.Main;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -17,12 +17,12 @@ public class ServerProxy
   public static void InteractWithTree(PlayerInteractEvent interactEvent) {
     boolean shifting = true;
 
-    if (!TreeChoppin.disableShift) {
-      if (interactEvent.getEntityPlayer().isSneaking() && !TreeChoppin.reverseShift) {
+    if (!Main.disableShift) {
+      if (interactEvent.getEntityPlayer().isSneaking() && !Main.reverseShift) {
         shifting = false;
       }
 
-      if (!interactEvent.getEntityPlayer().isSneaking() && TreeChoppin.reverseShift) {
+      if (!interactEvent.getEntityPlayer().isSneaking() && Main.reverseShift) {
         shifting = false;
       }
     }

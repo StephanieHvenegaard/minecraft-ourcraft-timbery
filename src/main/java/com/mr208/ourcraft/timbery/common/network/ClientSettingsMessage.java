@@ -1,7 +1,7 @@
-package com.mr208.treechoppin.common.network;
-
-import com.mr208.treechoppin.core.TreeChoppin;
+package com.mr208.ourcraft.timbery.common.network;
 import java.util.function.Supplier;
+
+import com.mr208.ourcraft.timbery.core.Main;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -26,8 +26,8 @@ public class ClientSettingsMessage
   {
     public static void handle(ClientSettingsMessage msg, Supplier<NetworkEvent.Context> ctx) {
       ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
-        TreeChoppin.reverseShift = msg.m_ReverseShift;
-        TreeChoppin.disableShift = msg.m_DisableShift;
+        Main.reverseShift = msg.m_ReverseShift;
+        Main.disableShift = msg.m_DisableShift;
       });
 
       ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);

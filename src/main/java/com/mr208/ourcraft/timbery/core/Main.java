@@ -1,11 +1,11 @@
-package com.mr208.treechoppin.core;
+package com.mr208.ourcraft.timbery.core;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import com.mr208.treechoppin.common.config.TCConfig;
-import com.mr208.treechoppin.common.network.ClientSettingsMessage;
-import com.mr208.treechoppin.common.network.ServerSettingsMessage;
+import com.mr208.ourcraft.timbery.common.config.TCConfig;
+import com.mr208.ourcraft.timbery.common.network.ClientSettingsMessage;
+import com.mr208.ourcraft.timbery.common.network.ServerSettingsMessage;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.block.Block;
@@ -26,12 +26,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 
 
-@Mod("treechoppin")
-public class TreeChoppin
+@Mod("ourcraft-timbery")
+public class Main
 {
-  public static final String MOD_ID = "treechoppin";
+  public static final String MOD_ID = "ourcraft-timbery";
   private static final String PROTOCOL_VERSION = Integer.toString(1);
-  public static SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation("treechoppin", "main_channel"))
+  public static SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation("ourcraft-timbery", "main_channel"))
           .clientAcceptedVersions(PROTOCOL_VERSION::equals)
           .serverAcceptedVersions(PROTOCOL_VERSION::equals)
           .networkProtocolVersion(() -> PROTOCOL_VERSION)
@@ -56,8 +56,8 @@ public class TreeChoppin
   public static boolean useTagLeaves;
 
 
-  public TreeChoppin() {
-    CommentedFileConfig configData = (CommentedFileConfig)CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve("treechoppin.toml")).sync().autosave().writingMode(WritingMode.REPLACE).build();
+  public Main() {
+    CommentedFileConfig configData = (CommentedFileConfig)CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve("ourcraft-timbery.toml")).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
     configData.load();
 
