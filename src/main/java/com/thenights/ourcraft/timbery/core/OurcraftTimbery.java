@@ -1,11 +1,11 @@
-package com.mr208.ourcraft.timbery.core;
+package com.thenights.ourcraft.timbery.core;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import com.mr208.ourcraft.timbery.common.config.TCConfig;
-import com.mr208.ourcraft.timbery.common.network.ClientSettingsMessage;
-import com.mr208.ourcraft.timbery.common.network.ServerSettingsMessage;
+import com.thenights.ourcraft.timbery.common.config.TCConfig;
+import com.thenights.ourcraft.timbery.common.network.ClientSettingsMessage;
+import com.thenights.ourcraft.timbery.common.network.ServerSettingsMessage;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.block.Block;
@@ -26,8 +26,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 
 
-@Mod("ourcraft-timbery")
-public class Main
+@Mod(OurcraftTimbery.MOD_ID)
+public class OurcraftTimbery
 {
   public static final String MOD_ID = "ourcraft-timbery";
   private static final String PROTOCOL_VERSION = Integer.toString(1);
@@ -56,7 +56,7 @@ public class Main
   public static boolean useTagLeaves;
 
 
-  public Main() {
+  public OurcraftTimbery() {
     CommentedFileConfig configData = (CommentedFileConfig)CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve("ourcraft-timbery.toml")).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
     configData.load();

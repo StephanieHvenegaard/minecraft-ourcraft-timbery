@@ -1,8 +1,8 @@
-package com.mr208.ourcraft.timbery.common.handler;
-import com.mr208.ourcraft.timbery.common.tree.Tree;
+package com.thenights.ourcraft.timbery.common.handler;
+import com.thenights.ourcraft.timbery.common.tree.Tree;
 import java.util.*;
 
-import com.mr208.ourcraft.timbery.core.Main;
+import com.thenights.ourcraft.timbery.core.OurcraftTimbery;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -137,17 +137,17 @@ public class TreeHandler {
 
     if (world.getBlockState(blockPos).getBlock() != originBlock) {
 
-      if (Main.plantSapling && world.getBlockState(blockPos).getMaterial() == Material.LEAVES && this.tree.GetM_Leaves().isEmpty()) {
+      if (OurcraftTimbery.plantSapling && world.getBlockState(blockPos).getMaterial() == Material.LEAVES && this.tree.GetM_Leaves().isEmpty()) {
         this.tree.InsertLeaf(blockPos);
       }
 
-      if (Main.decayLeaves && Main.registeredLeaves.contains(world.getBlockState(blockPos).getBlock())) {
+      if (OurcraftTimbery.decayLeaves && OurcraftTimbery.registeredLeaves.contains(world.getBlockState(blockPos).getBlock())) {
         this.tree.InsertLeaf(blockPos);
 
         return false;
       }
 
-      if (Main.decayLeaves && world.getBlockState(blockPos).getMaterial() == Material.LEAVES) {
+      if (OurcraftTimbery.decayLeaves && world.getBlockState(blockPos).getMaterial() == Material.LEAVES) {
         this.tree.InsertLeaf(blockPos);
 
         return false;
@@ -182,7 +182,7 @@ public class TreeHandler {
         soundReduced++;
       }
 
-      if (Main.plantSapling && !tmpTree.GetM_Leaves().isEmpty()) {
+      if (OurcraftTimbery.plantSapling && !tmpTree.GetM_Leaves().isEmpty()) {
 
         BlockPos tmpPosition = getLastElement(tmpTree.GetM_Leaves());
         PlantSapling(world.getWorld(), tmpPosition, tmpTree.getM_Position());
@@ -190,7 +190,7 @@ public class TreeHandler {
 
       soundReduced = 0;
 
-      if (Main.decayLeaves)
+      if (OurcraftTimbery.decayLeaves)
       {
         for (BlockPos blockPos : tmpTree.GetM_Leaves()) {
 

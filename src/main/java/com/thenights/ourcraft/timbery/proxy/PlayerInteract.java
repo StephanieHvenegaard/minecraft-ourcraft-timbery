@@ -1,4 +1,4 @@
-package com.mr208.ourcraft.timbery.proxy;
+package com.thenights.ourcraft.timbery.proxy;
 
 import net.minecraft.util.math.BlockPos;
 

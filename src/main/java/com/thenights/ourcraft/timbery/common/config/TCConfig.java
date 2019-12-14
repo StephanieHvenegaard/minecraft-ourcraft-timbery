@@ -1,4 +1,4 @@
-package com.mr208.ourcraft.timbery.common.config;
+package com.thenights.ourcraft.timbery.common.config;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package com.mr208.ourcraft.timbery.common.network;
+package com.thenights.ourcraft.timbery.common.network;
 
 import java.util.function.Supplier;
 
-import com.mr208.ourcraft.timbery.core.Main;
+import com.thenights.ourcraft.timbery.core.OurcraftTimbery;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -34,8 +34,8 @@ public class ServerSettingsMessage
   {
     public static void handle(ServerSettingsMessage msg, Supplier<NetworkEvent.Context> ctx) {
       ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
-        Main.reverseShift = msg.m_ReverseShift;
-        Main.disableShift = msg.m_DisableShift;
+        OurcraftTimbery.reverseShift = msg.m_ReverseShift;
+        OurcraftTimbery.disableShift = msg.m_DisableShift;
       });
 
       ((NetworkEvent.Context)ctx.get()).setPacketHandled(true);

@@ -26,3 +26,4 @@ forge*changelog.txt
 /ourcraft-mod/.nb-gradle/
 ourcraft-mod/\.vscode/settings\.json
 /.nb-gradle/
+/src/main/java/com/mr208/ourcraft/timbery/

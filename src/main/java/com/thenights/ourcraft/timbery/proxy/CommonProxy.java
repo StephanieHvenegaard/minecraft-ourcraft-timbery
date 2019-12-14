@@ -1,12 +1,12 @@
-package com.mr208.ourcraft.timbery.proxy;
+package com.thenights.ourcraft.timbery.proxy;
 
-import com.mr208.ourcraft.timbery.common.config.TCConfig;
-import com.mr208.ourcraft.timbery.common.handler.TreeHandler;
+import com.thenights.ourcraft.timbery.common.config.TCConfig;
+import com.thenights.ourcraft.timbery.common.handler.TreeHandler;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.mr208.ourcraft.timbery.core.Main;
+import com.thenights.ourcraft.timbery.core.OurcraftTimbery;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -35,11 +35,11 @@ public class CommonProxy
     boolean shifting = true;
 
     if (!((Boolean) TCConfig.options.disableShift.get()).booleanValue()) {
-      if (interactEvent.getEntityPlayer().isSneaking() && !Main.reverseShift) {
+      if (interactEvent.getEntityPlayer().isSneaking() && !OurcraftTimbery.reverseShift) {
         shifting = false;
       }
 
-      if (!interactEvent.getEntityPlayer().isSneaking() && Main.reverseShift) {
+      if (!interactEvent.getEntityPlayer().isSneaking() && OurcraftTimbery.reverseShift) {
         shifting = false;
       }
     }
@@ -108,7 +108,7 @@ public class CommonProxy
 
 
   protected static boolean CheckWoodenBlock(World world, BlockPos blockPos) {
-    if (Main.registeredLogs.contains(world.getBlockState(blockPos).getBlock())) {
+    if (OurcraftTimbery.registeredLogs.contains(world.getBlockState(blockPos).getBlock())) {
       return true;
     }
     return (world.getBlockState(blockPos).getMaterial() == Material.WOOD);
@@ -120,7 +120,7 @@ public class CommonProxy
       return false;
     }
 
-    if (Main.blacklistAxes.contains(entityPlayer.getHeldItemMainhand().getItem())) {
+    if (OurcraftTimbery.blacklistAxes.contains(entityPlayer.getHeldItemMainhand().getItem())) {
       return false;
     }
     return entityPlayer.getHeldItemMainhand().getToolTypes().contains(ToolType.AXE);

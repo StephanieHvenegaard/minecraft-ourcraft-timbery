@@ -1,7 +1,7 @@
-package com.mr208.ourcraft.timbery.proxy;
+package com.thenights.ourcraft.timbery.proxy;
 
-import com.mr208.ourcraft.timbery.common.handler.TreeHandler;
-import com.mr208.ourcraft.timbery.core.Main;
+import com.thenights.ourcraft.timbery.common.handler.TreeHandler;
+import com.thenights.ourcraft.timbery.core.OurcraftTimbery;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -17,12 +17,12 @@ public class ServerProxy
   public static void InteractWithTree(PlayerInteractEvent interactEvent) {
     boolean shifting = true;
 
-    if (!Main.disableShift) {
-      if (interactEvent.getEntityPlayer().isSneaking() && !Main.reverseShift) {
+    if (!OurcraftTimbery.disableShift) {
+      if (interactEvent.getEntityPlayer().isSneaking() && !OurcraftTimbery.reverseShift) {
         shifting = false;
       }
 
-      if (!interactEvent.getEntityPlayer().isSneaking() && Main.reverseShift) {
+      if (!interactEvent.getEntityPlayer().isSneaking() && OurcraftTimbery.reverseShift) {
         shifting = false;
       }
     }
