@@ -56,7 +56,15 @@ public class TreeHandler {
       checkedBlocks.add(currentPos);
 
       tmpBlocks.addAll(LookAroundBlock(logBlock, currentPos, world, checkedBlocks));
-      
+
+      Set<BlockPos> remBlocks = new HashSet<>();
+      for(BlockPos bp : tmpBlocks)
+      {
+          if(bp.getY() <= blockPos.getY())
+            remBlocks.add(bp);
+      }
+      tmpBlocks.removeAll(remBlocks);
+
       queuedBlocks.addAll(tmpBlocks);
       checkedBlocks.addAll(tmpBlocks);
       tmpBlocks.clear();
