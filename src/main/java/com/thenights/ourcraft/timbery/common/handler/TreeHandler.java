@@ -43,7 +43,7 @@ public class TreeHandler {
     Queue<BlockPos> queuedBlocks = new LinkedList<>();
     Set<BlockPos> tmpBlocks = new HashSet<>();
     Set<BlockPos> checkedBlocks = new HashSet<>();
-
+    BlockPos baseblock = blockPos;
     Block logBlock = world.getBlockState(blockPos).getBlock();
     this.tree = new Tree();
 
@@ -56,7 +56,7 @@ public class TreeHandler {
       checkedBlocks.add(currentPos);
 
       tmpBlocks.addAll(LookAroundBlock(logBlock, currentPos, world, checkedBlocks));
-      
+
       queuedBlocks.addAll(tmpBlocks);
       checkedBlocks.addAll(tmpBlocks);
       tmpBlocks.clear();
@@ -69,6 +69,16 @@ public class TreeHandler {
       checkedBlocks.add(blockPos1);
       LookAroundBlock(null, blockPos1, world, checkedBlocks);
     }
+    Set<BlockPos> remBlocks = new HashSet<>();
+    for(BlockPos bp : tree.GetM_Wood())
+    {
+      boolean isBelow = bp.getY() <= baseblock.getY();
+      // OurcraftTimbery.LOGGER.info("bp-y: "+ bp.getY() + " <= base-y: " +baseblock.getY() +" = "+isBelow);
+      if(isBelow)
+        remBlocks.add(bp);
+    }
+    tree.GetM_Wood().removeAll(remBlocks);
+
 
     this.tree.setM_Position(blockPos);
     m_Trees.put(entityPlayer.getUniqueID(), this.tree);
