@@ -56,6 +56,7 @@ public class TreeHandler {
       checkedBlocks.add(currentPos);
 
       tmpBlocks.addAll(LookAroundBlock(logBlock, currentPos, world, checkedBlocks));
+      
       queuedBlocks.addAll(tmpBlocks);
       checkedBlocks.addAll(tmpBlocks);
       tmpBlocks.clear();
