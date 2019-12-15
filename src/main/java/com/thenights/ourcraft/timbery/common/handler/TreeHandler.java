@@ -60,7 +60,7 @@ public class TreeHandler {
       Set<BlockPos> remBlocks = new HashSet<>();
       for(BlockPos bp : tmpBlocks)
       {
-          if(bp.getY() <= blockPos.getY())
+          if(bp.getY() <= logBlock)
             remBlocks.add(bp);
       }
       tmpBlocks.removeAll(remBlocks);
