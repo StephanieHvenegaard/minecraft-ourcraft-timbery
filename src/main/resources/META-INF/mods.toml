@@ -28,9 +28,7 @@ logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 authors="the Ourcraft team, mallrat208" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''
-Add treechopping with stumps to ourcraft.
-'''
+description='''Add treechopping with stumps to ourcraft.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.ourcraft-core]] #optional
 # the modid of the dependency
