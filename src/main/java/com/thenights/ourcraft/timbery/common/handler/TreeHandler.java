@@ -39,6 +39,7 @@ public class TreeHandler {
 
 
   public int AnalyzeTree(World world, BlockPos blockPos, PlayerEntity entityPlayer) {
+    OurcraftTimbery.LOGGER.info("starting tree analyze");
     Queue<BlockPos> queuedBlocks = new LinkedList<>();
     Set<BlockPos> tmpBlocks = new HashSet<>();
     Set<BlockPos> checkedBlocks = new HashSet<>();

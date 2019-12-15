@@ -1,6 +1,6 @@
 package com.thenights.ourcraft.timbery.proxy;
 
-import com.thenights.ourcraft.timbery.common.config.TCConfig;
+import com.thenights.ourcraft.timbery.core.TCConfig;
 import com.thenights.ourcraft.timbery.common.handler.TreeHandler;
 import java.util.HashMap;
 import java.util.Map;

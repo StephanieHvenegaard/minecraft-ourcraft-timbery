@@ -3,7 +3,6 @@ package com.thenights.ourcraft.timbery.core;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import com.thenights.ourcraft.timbery.common.config.TCConfig;
 import com.thenights.ourcraft.timbery.common.network.ClientSettingsMessage;
 import com.thenights.ourcraft.timbery.common.network.ServerSettingsMessage;
 import java.util.HashSet;
@@ -22,14 +21,15 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
-
-
-@Mod(OurcraftTimbery.MOD_ID)
+@Mod(OurcraftTimbery.MODID)
 public class OurcraftTimbery
 {
-  public static final String MOD_ID = "ourcraft-timbery";
+  public static final String MODID = "ourcraft-timbery";
+  public static final Logger LOGGER = LogManager.getLogger(MODID);                    // Logger
   private static final String PROTOCOL_VERSION = Integer.toString(1);
   public static SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation("ourcraft-timbery", "main_channel"))
           .clientAcceptedVersions(PROTOCOL_VERSION::equals)
