@@ -73,7 +73,7 @@ public class TreeHandler {
     for(BlockPos bp : tree.GetM_Wood())
     {
       boolean isBelow = bp.getY() <= baseblock.getY();
-      OurcraftTimbery.LOGGER.info("bp-y: "+ bp.getY() + " <= base-y: " +baseblock.getY() +" = "+isBelow);
+      // OurcraftTimbery.LOGGER.info("bp-y: "+ bp.getY() + " <= base-y: " +baseblock.getY() +" = "+isBelow);
       if(isBelow)
         remBlocks.add(bp);
     }
