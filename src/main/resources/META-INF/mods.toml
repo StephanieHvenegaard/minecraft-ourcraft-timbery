@@ -14,7 +14,7 @@ loaderVersion="[28,)" #mandatory (28 is current forge version)
 # The modid of the mod
 modId="ourcraft-timbery" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${file.jarVersion}" #mandatory
+version="1.0.0" #mandatory
 # A display name for the mod
 displayName="OurCraft Timbery" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
@@ -22,20 +22,14 @@ displayName="OurCraft Timbery" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile=logo.png" #optional
+logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-#authors="Love, Cheese and small house plants" #optional
+authors="the Ourcraft team, mallrat208" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Forked and heavily inspired form Orignal auther
-Git        : https://github.com/mallrat208
-curseforge : https://www.curseforge.com/minecraft/mc-mods/tree-choppin
-and qelifirms timber mod.
-
-but we found it lacking in features so this aims to change that.
-so that it merges good with the ourcraft server.
+Add treechopping with stumps to ourcraft.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.ourcraft-core]] #optional
