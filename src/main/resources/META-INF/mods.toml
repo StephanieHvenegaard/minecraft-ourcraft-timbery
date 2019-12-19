@@ -14,7 +14,7 @@ loaderVersion="[28,)" #mandatory (28 is current forge version)
 # The modid of the mod
 modId="ourcraft-timbery" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="1.0.0" #mandatory
+version="1.0.1" #mandatory
 # A display name for the mod
 displayName="OurCraft Timbery" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
@@ -30,7 +30,7 @@ authors="the Ourcraft team, mallrat208" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''Add treechopping with stumps to ourcraft.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.ourcraft-core]] #optional
+[[dependencies.ourcraft-timbery]] #optional
 # the modid of the dependency
 modId="forge" #mandatory
 # Does this dependency have to exist - if not, ordering below must be specified
