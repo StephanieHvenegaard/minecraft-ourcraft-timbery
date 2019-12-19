@@ -109,7 +109,7 @@ jar {
 }
 task deobfJar(type: Jar) {
     from(sourceSets.main.output)
-    archiveName = "${baseName} ${version}-deobf.${extension}"
+    archiveName = "${baseName}-${modMinecraftVersion}${version}-deobf.${extension}"
 }
 
 task devJar(type: Jar) {
