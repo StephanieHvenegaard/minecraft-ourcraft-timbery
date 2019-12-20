@@ -80,8 +80,12 @@ public class CommonProxy
 
       BlockPos blockPos = ((PlayerInteract)m_PlayerData.get(breakSpeed.getEntityPlayer().getUniqueID())).m_BlockPos;
 
+      // Changing block break speed.
+
       if (blockPos.equals(breakSpeed.getPos())) {
-        breakSpeed.setNewSpeed(breakSpeed.getOriginalSpeed() / ((PlayerInteract)m_PlayerData.get(breakSpeed.getEntityPlayer().getUniqueID())).m_LogCount / 2.0F);
+        float speedmodifier = ((PlayerInteract) m_PlayerData.get(breakSpeed.getEntityPlayer().getUniqueID())).m_LogCount / 100;
+        breakSpeed.setNewSpeed(breakSpeed.getOriginalSpeed() - (2 * speedmodifier) );
+
       } else {
         breakSpeed.setNewSpeed(breakSpeed.getOriginalSpeed());
       }
@@ -99,7 +103,8 @@ public class CommonProxy
         treeHandler.DestroyTree(breakEvent.getWorld(), breakEvent.getPlayer());
 
         if (!breakEvent.getPlayer().isCreative()) {
-          int extraDamage = (int)((PlayerInteract)m_PlayerData.get(breakEvent.getPlayer().getUniqueID())).m_LogCount;
+          // Axe break damage.
+          int extraDamage = (int)(((PlayerInteract)m_PlayerData.get(breakEvent.getPlayer().getUniqueID())).m_LogCount * 0.1f);
           breakEvent.getPlayer().getHeldItemMainhand().attemptDamageItem(extraDamage, breakEvent.getWorld().getRandom(), (ServerPlayerEntity)breakEvent.getPlayer());
         }
       }
