@@ -7,20 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
 
 public class TreeHandler {
   private static Map<UUID, Tree> m_Trees = new HashMap<>();
@@ -39,7 +28,6 @@ public class TreeHandler {
 
 
   public int AnalyzeTree(World world, BlockPos blockPos, PlayerEntity entityPlayer) {
-    // OurcraftTimbery.LOGGER.info("starting tree analyze");
     Queue<BlockPos> queuedBlocks = new LinkedList<>();
     Set<BlockPos> tmpBlocks = new HashSet<>();
     Set<BlockPos> checkedBlocks = new HashSet<>();
@@ -73,7 +61,7 @@ public class TreeHandler {
     for(BlockPos bp : tree.GetM_Wood())
     {
       boolean isBelow = bp.getY() <= baseblock.getY();
-      // OurcraftTimbery.LOGGER.info("bp-y: "+ bp.getY() + " <= base-y: " +baseblock.getY() +" = "+isBelow);
+
       if(isBelow)
         remBlocks.add(bp);
     }
@@ -89,7 +77,6 @@ public class TreeHandler {
 
   private Queue<BlockPos> LookAroundBlock(Block logBlock, BlockPos currentPos, World world, Set<BlockPos> checkedBlocks) {
     Queue<BlockPos> queuedBlocks = new LinkedList<>();
-
 
     for (int i = -1; i <= 1; i++) {
       BlockPos tmpPos = new BlockPos(currentPos.getX() + 1, currentPos.getY() + i, currentPos.getZ());
@@ -149,7 +136,7 @@ public class TreeHandler {
 
     if (world.getBlockState(blockPos).getBlock() != originBlock) {
 
-      if (OurcraftTimbery.plantSapling && world.getBlockState(blockPos).getMaterial() == Material.LEAVES && this.tree.GetM_Leaves().isEmpty()) {
+      if (world.getBlockState(blockPos).getMaterial() == Material.LEAVES && this.tree.GetM_Leaves().isEmpty()) {
         this.tree.InsertLeaf(blockPos);
       }
 

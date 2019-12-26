@@ -73,7 +73,7 @@ public class TCConfig
     Options() {
       TCConfig.BUILDER.push("options");
       this.disableShift = TCConfig.BUILDER.comment("Ignore Sneaking when chopping trees").define("disableShift", false);
-      this.reverseShift = TCConfig.BUILDER.comment("Only chop down trees when sneaking").define("reverseShift", false);
+      this.reverseShift = TCConfig.BUILDER.comment("Only chop down trees when sneaking").define("reverseShift", true);
       this.decayLeaves = TCConfig.BUILDER.comment("Cut down leaves and logs").define("decayLeaves", true);
       TCConfig.BUILDER.pop();
     }
