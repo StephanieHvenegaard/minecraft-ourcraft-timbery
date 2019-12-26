@@ -194,12 +194,6 @@ public class TreeHandler {
         soundReduced++;
       }
 
-      if (OurcraftTimbery.plantSapling && !tmpTree.GetM_Leaves().isEmpty()) {
-
-        BlockPos tmpPosition = getLastElement(tmpTree.GetM_Leaves());
-        PlantSapling(world.getWorld(), tmpPosition, tmpTree.getM_Position());
-      }
-
       soundReduced = 0;
 
       if (OurcraftTimbery.decayLeaves)
@@ -217,35 +211,6 @@ public class TreeHandler {
           soundReduced++;
         }
       }
-    }
-  }
-
-
-  private void PlantSapling(World world, BlockPos blockPos, BlockPos originPos) {
-    Set<ItemStack> leafDrop = new HashSet<>();
-    BlockPos plantPos1 = new BlockPos(originPos.getX() - 1, originPos.getY(), originPos.getZ() - 1);
-    int counter = 0;
-
-    while (leafDrop.isEmpty() && counter <= 100) {
-      NonNullList<ItemStack> tmpList = NonNullList.create();
-
-      tmpList.addAll(Block.getDrops(world.getBlockState(blockPos), (ServerWorld)world.getWorld(), blockPos, null));
-
-      leafDrop.addAll((Collection<? extends ItemStack>)tmpList);
-
-      counter++;
-    }
-
-    if (leafDrop.isEmpty()) {
-      return;
-    }
-
-    FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((ServerWorld)world);
-    fakePlayer.setHeldItem(Hand.MAIN_HAND, leafDrop.iterator().next());
-
-    for (ItemStack itemStack : leafDrop) {
-      if (ItemTags.LEAVES.contains(itemStack.getItem()))
-        itemStack.onItemUse(new ItemUseContext((PlayerEntity)fakePlayer, Hand.MAIN_HAND, new BlockRayTraceResult(new Vec3d(0.0D, 0.0D, 0.0D), Direction.NORTH, plantPos1, false)));
     }
   }
 }
