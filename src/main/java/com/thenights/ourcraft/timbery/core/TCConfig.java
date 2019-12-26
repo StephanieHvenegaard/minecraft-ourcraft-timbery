@@ -68,14 +68,12 @@ public class TCConfig
   {
     public final ForgeConfigSpec.BooleanValue disableShift;
     public final ForgeConfigSpec.BooleanValue reverseShift;
-    public final ForgeConfigSpec.BooleanValue plantSapling;
     public final ForgeConfigSpec.BooleanValue decayLeaves;
 
     Options() {
       TCConfig.BUILDER.push("options");
       this.disableShift = TCConfig.BUILDER.comment("Ignore Sneaking when chopping trees").define("disableShift", false);
-      this.reverseShift = TCConfig.BUILDER.comment("Only chop down trees when sneaking").define("reverseShift", false);
-      this.plantSapling = TCConfig.BUILDER.comment("Automaticly plant sapling on tree chop").define("plantSapling", true);
+      this.reverseShift = TCConfig.BUILDER.comment("Only chop down trees when sneaking").define("reverseShift", true);
       this.decayLeaves = TCConfig.BUILDER.comment("Cut down leaves and logs").define("decayLeaves", true);
       TCConfig.BUILDER.pop();
     }

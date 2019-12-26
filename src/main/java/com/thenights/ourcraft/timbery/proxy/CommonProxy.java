@@ -34,11 +34,10 @@ public class CommonProxy
   public static void InteractWithTree(PlayerInteractEvent interactEvent) {
     boolean shifting = true;
 
-    if (!((Boolean) TCConfig.options.disableShift.get()).booleanValue()) {
+    if (!TCConfig.options.disableShift.get().booleanValue()) {
       if (interactEvent.getEntityPlayer().isSneaking() && !OurcraftTimbery.reverseShift) {
         shifting = false;
       }
-
       if (!interactEvent.getEntityPlayer().isSneaking() && OurcraftTimbery.reverseShift) {
         shifting = false;
       }
