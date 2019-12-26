@@ -41,20 +41,11 @@ public class OurcraftTimbery
   public static Set<Block> registeredLogs = new HashSet<>();
   public static Set<Block> registeredLeaves = new HashSet<>();
 
-
-  public static boolean plantSapling;
-
-
   public static boolean decayLeaves;
-
   public static boolean disableShift;
-
   public static boolean reverseShift;
-
   public static boolean useTagLog;
-
   public static boolean useTagLeaves;
-
 
   public OurcraftTimbery() {
     CommentedFileConfig configData = (CommentedFileConfig)CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve("ourcraft-timbery.toml")).sync().autosave().writingMode(WritingMode.REPLACE).build();
@@ -78,7 +69,6 @@ public class OurcraftTimbery
   public void loadComplete(FMLLoadCompleteEvent event) {
     reverseShift = ((Boolean)TCConfig.options.reverseShift.get()).booleanValue();
     disableShift = ((Boolean)TCConfig.options.disableShift.get()).booleanValue();
-    plantSapling = ((Boolean)TCConfig.options.plantSapling.get()).booleanValue();
     decayLeaves = ((Boolean)TCConfig.options.decayLeaves.get()).booleanValue();
     useTagLeaves = ((Boolean)TCConfig.logs.logTag.get()).booleanValue();
     useTagLeaves = ((Boolean)TCConfig.leaves.leavesTag.get()).booleanValue();
