@@ -52,7 +52,7 @@ public class OurcraftTimbery
 
     configData.load();
 
-    TCConfig.SPEC.setConfig((CommentedConfig)configData);
+    TimberyConfig.SPEC.setConfig((CommentedConfig)configData);
 
     FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
     FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -67,13 +67,13 @@ public class OurcraftTimbery
   }
 
   public void loadComplete(FMLLoadCompleteEvent event) {
-    reverseShift = ((Boolean)TCConfig.options.reverseShift.get()).booleanValue();
-    disableShift = ((Boolean)TCConfig.options.disableShift.get()).booleanValue();
-    decayLeaves = ((Boolean)TCConfig.options.decayLeaves.get()).booleanValue();
-    useTagLeaves = ((Boolean)TCConfig.logs.logTag.get()).booleanValue();
-    useTagLeaves = ((Boolean)TCConfig.leaves.leavesTag.get()).booleanValue();
+    reverseShift = ((Boolean) TimberyConfig.options.reverseShift.get()).booleanValue();
+    disableShift = ((Boolean) TimberyConfig.options.disableShift.get()).booleanValue();
+    decayLeaves = ((Boolean) TimberyConfig.options.decayLeaves.get()).booleanValue();
+    useTagLeaves = ((Boolean) TimberyConfig.logs.logTag.get()).booleanValue();
+    useTagLeaves = ((Boolean) TimberyConfig.leaves.leavesTag.get()).booleanValue();
 
-    for (String axe : TCConfig.axes.blacklistAxe.get()) {
+    for (String axe : TimberyConfig.axes.blacklistAxe.get()) {
 
       Item temp = (Item)ForgeRegistries.ITEMS.getValue(new ResourceLocation(axe));
       if (temp != Items.AIR) {
@@ -83,7 +83,7 @@ public class OurcraftTimbery
     if (useTagLog) {
       registeredLogs.addAll(BlockTags.LOGS.getAllElements());
     }
-    for (String log : TCConfig.logs.logBlocks.get()) {
+    for (String log : TimberyConfig.logs.logBlocks.get()) {
 
       Block temp = (Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation(log));
       if (temp != Blocks.AIR && !registeredLogs.contains(temp)) {
@@ -93,7 +93,7 @@ public class OurcraftTimbery
     if (useTagLeaves) {
       registeredLeaves.addAll(BlockTags.LEAVES.getAllElements());
     }
-    for (String log : TCConfig.leaves.leaves.get()) {
+    for (String log : TimberyConfig.leaves.leaves.get()) {
 
       Block temp = (Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation(log));
       if (temp != Blocks.AIR && !registeredLeaves.contains(temp))

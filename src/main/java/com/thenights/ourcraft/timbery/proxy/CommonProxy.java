@@ -1,6 +1,6 @@
 package com.thenights.ourcraft.timbery.proxy;
 
-import com.thenights.ourcraft.timbery.core.TCConfig;
+import com.thenights.ourcraft.timbery.core.TimberyConfig;
 import com.thenights.ourcraft.timbery.common.handler.TreeHandler;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class CommonProxy
   public static void InteractWithTree(PlayerInteractEvent interactEvent) {
     boolean shifting = true;
 
-    if (!TCConfig.options.disableShift.get().booleanValue()) {
+    if (!TimberyConfig.options.disableShift.get().booleanValue()) {
       if (interactEvent.getEntityPlayer().isSneaking() && !OurcraftTimbery.reverseShift) {
         shifting = false;
       }
